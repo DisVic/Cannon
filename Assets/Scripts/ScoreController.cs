@@ -17,6 +17,5 @@ public class ScoreController : MonoBehaviour
     private void HandleAddPoints(int points)
     {
         currentScore += points;
-        Debug.Log(currentScore);
     }
 }

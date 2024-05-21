@@ -325,10 +325,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdc58fab9eb2270458b205289d7a5bac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
-  friction: 1
-  lerpSpeed: 5
-  cannonBall: {fileID: 7051615628353036781, guid: 21c297519faffbd44aca45f4cda20f5a, type: 3}
+  speed: 0.8
+  friction: 0.5
+  lerpSpeed: 10
+  cannonBall: {fileID: 7411907819285642167, guid: 804e119038746b8448174d5a59aaa6cd, type: 3}
   shotPos: {fileID: 1853139193}
   explosion: {fileID: 1000012560919920, guid: 85a8865d1bf4a63478038fae23776de8, type: 3}
   firePower: 2500
@@ -1078,7 +1078,7 @@ MonoBehaviour:
   - {fileID: 5204957074470553561, guid: f634b045f4941ac47b277e8833fec1bf, type: 3}
   - {fileID: 1437821769435224460, guid: 654efec6bad4bcb4b9607121a3bd6a90, type: 3}
   - {fileID: 6496261972059531137, guid: 4f441601b74d25b42bec19e9bbb7a329, type: 3}
-  spawnAreaSize: {x: 60, y: 25, z: 30}
+  spawnAreaSize: {x: 60, y: 22, z: 30}
   spawnLayerMask:
     serializedVersion: 2
     m_Bits: 0
@@ -1094,7 +1094,7 @@ Transform:
   m_GameObject: {fileID: 1484962921}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 14, z: 49.1}
+  m_LocalPosition: {x: 0, y: 15.3, z: 49.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

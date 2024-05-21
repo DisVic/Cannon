@@ -3,13 +3,14 @@ using UnityEngine;
 
 public class CannonBall : MonoBehaviour
 {
-    private float lifeTime = 4f;
+    private float lifeTime = 2.5f;
     [SerializeField] private GameObject destroyEffect;
     private bool destroy = false;
     private Rigidbody rb;
 
     void Start()
     {
+        rb = GetComponent<Rigidbody>();
     }
 
     void Update()
@@ -20,57 +21,45 @@ public class CannonBall : MonoBehaviour
     public void StatusCheck()
     {
         lifeTime -= Time.deltaTime;
-        if (lifeTime < 0 && !destroy) TriggerDestroy();
+        if (lifeTime < 0 && !destroy) DestroyCannonBall();
     }
 
     void OnCollisionEnter(Collision collision)
     {
-        // Проверяем, является ли объект мишенью по тегу
         if (collision.gameObject.CompareTag("Target") && !destroy)
         {
-            // Уничтожаем мишень
-            Destroy(collision.gameObject);
-
-            // Уничтожаем снаряд
-            TriggerDestroy();
-            DestroyCannonBall();
+            CoinController coinController = collision.gameObject.GetComponent<CoinController>();
+            //if (coinController != null)
+            //{
+            //    //EventManager.RaiseAddPoints(coinController.points);
+            //    Destroy(collision.gameObject); // Уничтожаем мишень
+            //}
+            DestroyBall();
         }
         else if (!destroy)
         {
-            // Просто уничтожаем снаряд при любом другом столкновении, если это не мишень
-            TriggerDestroy();
+            DestroyCannonBall();
         }
     }
 
-    public void TriggerDestroy()
+    private void DestroyBall()
     {
-        if (destroy) return;
+        destroy = true;
+        rb.velocity = Vector3.zero;
+        Destroy(gameObject); // Уничтожаем снаряд через 1 секунду
+    }
 
+    private void DestroyCannonBall()
+    {
         destroy = true;
 
         if (destroyEffect != null)
         {
             GameObject spawnedDestroyEffect = Instantiate(destroyEffect, transform.position, transform.rotation);
-            StartCoroutine(Death(spawnedDestroyEffect));
+            Destroy(spawnedDestroyEffect, 1); // Уничтожаем эффект через 1 секунду
         }
-        else
-        {
-            StartCoroutine(Death(null));
-        }
-    }
-    private void DestroyCannonBall()
-    {
+
         rb.velocity = Vector3.zero;
-        Destroy(transform.GetChild(0).gameObject);
-        Destroy(gameObject, 1);
-    }
-    private IEnumerator Death(GameObject spawnedDestroyEffect)
-    {
-        if (spawnedDestroyEffect != null)
-        {
-            yield return new WaitForSeconds(1);
-            Destroy(spawnedDestroyEffect);
-        }
-        Destroy(gameObject);
+        Destroy(gameObject); // Уничтожаем снаряд через 1 секунду
     }
 }
